@@ -19,7 +19,9 @@ export function LoginPage() {
   function validate(): boolean {
     const newErrors: FormErrors = { email: "", password: "" }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!email.trim()) newErrors.email = "This field can't be empty"
+    else if (!emailRegex.test(email)) newErrors.email = "Please enter a valid email address"
     if (!password.trim()) newErrors.password = "This field can't be empty"
 
     setErrors(newErrors)
@@ -45,7 +47,7 @@ export function LoginPage() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="text"
+                type="email"
                 placeholder="johndoe@gmail.com"
                 value={email}
                 onChange={(e) => {
